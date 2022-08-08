@@ -1,0 +1,202 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "Rubik";
+  src: url("../fonts/Rubik-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Rubik";
+  src: url("../fonts/Rubik-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+/*Обнуление*/
+* {
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:focus,
+:active {
+  outline: none;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+aside,
+nav,
+footer,
+header,
+section {
+  display: block;
+}
+
+html,
+body {
+  height: 100%;
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+body {
+  line-height: 1;
+  font-family: "Rubick", sans-serif;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input,
+button,
+textarea {
+  font-family: "Rubick", sans-serif;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+/*--------------------*/
+body {
+  position: relative;
+  font-size: 18px;
+  font-weight: 400;
+  color: #2D2D2D;
+  background: rgb(8, 0, 78);
+  background: -o-linear-gradient(135deg, rgba(8, 0, 78, 0.7) 8%, rgb(177, 225, 255) 100%);
+  background: linear-gradient(315deg, rgba(8, 0, 78, 0.7) 8%, rgb(177, 225, 255) 100%);
+}
+
+.container {
+  max-width: 1170px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+.app {
+  margin-top: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  min-height: 500px;
+}
+.app__component {
+  background-color: rgba(177, 225, 255, 0.5);
+  padding: 15px;
+}
+.app__component.app__component-left {
+  min-width: 320px;
+  margin-right: 10px;
+}
+.app__component.app__component-right {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.app__search-form {
+  width: 100%;
+}
+.app__search-input {
+  font-family: "Rubik", sans-serif;
+  color: #b3b3b3;
+  width: 100%;
+  height: 50px;
+  padding: 15px;
+}
+.app__search-input::-webkit-input-placeholder {
+  font-family: "Rubik", sans-serif;
+  font-size: 14px;
+}
+.app__search-input::-moz-placeholder {
+  font-family: "Rubik", sans-serif;
+  font-size: 14px;
+}
+.app__search-input:-ms-input-placeholder {
+  font-family: "Rubik", sans-serif;
+  font-size: 14px;
+}
+.app__search-input::-ms-input-placeholder {
+  font-family: "Rubik", sans-serif;
+  font-size: 14px;
+}
+.app__search-input::placeholder {
+  font-family: "Rubik", sans-serif;
+  font-size: 14px;
+}
+.app__btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #fff;
+  margin-top: 40px;
+  width: 100%;
+  padding: 15px;
+  cursor: pointer;
+  -webkit-transition: background-color 0.3s ease;
+  -o-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+}
+.app__btn:hover {
+  background-color: rgba(8, 0, 78, 0.1);
+}
+.app__btn.add-task-btn::before {
+  content: "";
+  width: 30px;
+  height: 30px;
+  background-image: url("../img/plus.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
