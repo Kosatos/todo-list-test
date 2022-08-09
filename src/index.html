@@ -17,11 +17,53 @@
 				<form class="app__search-form">
 					<input type="text" class="app__search-input" placeholder="Search your task...">
 				</form>
-				<div class="app__btn add-task-btn">Add task</div>
+				<h2 class="app__title">Your tasks:</h2>
+				<ul class="app__todo-list todo-list" id="todo-list">
+				</ul>
+				<div class="app__btn add-task-btn" id="add-task-btn">Add task</div>
+
 			</div>
-			<div class="app__component app__component-right"></div>
+			<div class="app__component app__component-right">
+			</div>
 		</div>
 	</div>
+
+	<div id="create-task-popup" class="overlay">
+		<div class="cancel" id="cancel-popup" href="/"></div>
+		<div class="popup">
+
+			<h2 class="app__title">Create your task</h2>
+
+			<form class="create-form" id="create-form">
+
+				<label for="create-task-name" class="create-form__label">Task name:</label>
+				<input type="text" class="create-form__input" id="create-task-name"
+					placeholder="Enter the task name...">
+
+				<label for="create-task-note" class="create-form__label">Notes:</label>
+				<textarea class="create-form__input  task-note" id="create-task-note"
+					placeholder="Enter the task notes..."></textarea>
+
+				<label for="create-task-deadline" class="create-form__label">Task deadline:</label>
+				<input type="date" class="create-form__input task-deadline" id="create-task-deadline">
+
+				<button class="create-form__btn">Create task</button>
+
+			</form>
+
+			<div class="popup__close" id="close-popup">
+				<svg class="popup__close-icon" width="30px" height="30px" viewBox="0 0 24 24"
+					xmlns="http://www.w3.org/2000/svg">
+					<g data-name="Layer 2">
+						<g data-name="close">
+							<rect width="24" height="24" transform="rotate(180 12 12)" opacity="0" />
+							<path
+								d="M13.41 12l4.3-4.29a1 1 0 1 0-1.42-1.42L12 10.59l-4.29-4.3a1 1 0 0 0-1.42 1.42l4.3 4.29-4.3 4.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.29-4.3 4.29 4.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z" />
+						</g>
+					</g>
+				</svg>
+			</div>
+		</div>
 
 </body>
 
