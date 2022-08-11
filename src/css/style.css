@@ -111,9 +111,9 @@ body {
   font-size: 18px;
   font-weight: 400;
   color: #fff;
-  background: rgb(8, 0, 78);
-  background: -o-linear-gradient(135deg, rgba(8, 0, 78, 0.7) 8%, rgb(177, 225, 255) 100%);
-  background: linear-gradient(315deg, rgba(8, 0, 78, 0.7) 8%, rgb(177, 225, 255) 100%);
+  background: #08004e;
+  background: -o-linear-gradient(135deg, rgba(8, 0, 78, 0.7019607843) 8%, #b1e1ff 100%);
+  background: linear-gradient(315deg, rgba(8, 0, 78, 0.7019607843) 8%, #b1e1ff 100%);
 }
 
 .container {
@@ -131,12 +131,20 @@ body {
   min-height: 500px;
 }
 .app__component {
-  background-color: rgba(177, 225, 255, 0.5);
+  background-color: rgba(177, 225, 255, 0.5019607843);
   padding: 15px;
 }
 .app__component.app__component-left {
+  min-width: 320px;
+  max-width: 50%;
   width: 320px;
   margin-right: 10px;
+  position: relative;
+}
+.app__component.app__component-left .grab {
+  right: -7px;
+  top: 0;
+  width: 14px;
 }
 .app__component.app__component-right {
   -webkit-box-flex: 1;
@@ -144,33 +152,42 @@ body {
           flex: 1;
 }
 .app__search-form {
+  position: relative;
   width: 100%;
 }
+.app__search-form::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  background-image: url("../img/search.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
 .app__search-input {
-  font-family: "Rubik", sans-serif;
-  color: #b3b3b3;
+  font-family: inherit;
+  font-size: 16px;
+  color: #808080;
   width: 100%;
   height: 50px;
   padding: 15px;
+  padding-right: 50px;
 }
 .app__search-input::-webkit-input-placeholder {
-  font-family: "Rubik", sans-serif;
   font-size: 14px;
 }
 .app__search-input::-moz-placeholder {
-  font-family: "Rubik", sans-serif;
   font-size: 14px;
 }
 .app__search-input:-ms-input-placeholder {
-  font-family: "Rubik", sans-serif;
   font-size: 14px;
 }
 .app__search-input::-ms-input-placeholder {
-  font-family: "Rubik", sans-serif;
   font-size: 14px;
 }
 .app__search-input::placeholder {
-  font-family: "Rubik", sans-serif;
   font-size: 14px;
 }
 .app__title {
@@ -185,7 +202,7 @@ body {
   position: absolute;
   width: 100%;
   height: 2px;
-  background-color: rgb(177, 225, 255);
+  background-color: #b1e1ff;
   left: 0;
   bottom: -5px;
 }
@@ -194,21 +211,27 @@ body {
   width: 100%;
 }
 .app__btn {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
   padding: 10px 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
   cursor: pointer;
   -webkit-transition: background-color 0.3s ease;
   -o-transition: background-color 0.3s ease;
   transition: background-color 0.3s ease;
 }
 .app__btn:hover {
-  background-color: rgba(8, 0, 78, 0.1);
+  background-color: rgba(8, 0, 78, 0.1019607843);
+}
+.app__btn.add-task-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 .app__btn.add-task-btn::before {
   content: "";
@@ -217,6 +240,16 @@ body {
   background-image: url("../img/plus.svg");
   background-repeat: no-repeat;
   background-position: center;
+}
+.app__edit-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
 }
 
 .todo-list__item {
@@ -231,7 +264,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: rgb(177, 225, 255);
+  background-color: #b1e1ff;
   border-left: solid 5px #808080;
   margin-bottom: 5px;
   -webkit-transition: background-color 0.3s ease;
@@ -240,7 +273,10 @@ body {
   cursor: pointer;
 }
 .todo-list__item.task-complete {
-  border-left-color: rgb(187, 255, 213);
+  border-left-color: #bbffd5;
+}
+.todo-list__item.task-process {
+  border-left-color: #08004e;
 }
 .todo-list__item:hover {
   background-color: rgb(124, 181, 216);
@@ -251,6 +287,10 @@ body {
       -ms-flex: 1;
           flex: 1;
   padding: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
 }
 .todo-list-item__controllers {
   width: 100px;
@@ -274,14 +314,124 @@ body {
   background-image: url("../img/done.svg");
 }
 .task-complete-btn:hover {
-  background-color: rgb(187, 255, 213);
+  background-color: #bbffd5;
 }
 
 .task-delete-btn {
   background-image: url("../img/delete.svg");
 }
 .task-delete-btn:hover {
-  background-color: rgb(255, 194, 194);
+  background-color: #ffc2c2;
+}
+
+@-webkit-keyframes changeEditBackground {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: rgba(8, 0, 78, 0.1019607843);
+  }
+}
+
+@keyframes changeEditBackground {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: rgba(8, 0, 78, 0.1019607843);
+  }
+}
+.edit-form {
+  display: none;
+  opacity: 0;
+  padding: 15px;
+  font-size: 18px;
+  border: solid 2px rgba(177, 225, 255, 0.5);
+}
+.edit-form.show {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  opacity: 1;
+  -webkit-animation: show 0.3s linear forwards;
+          animation: show 0.3s linear forwards;
+}
+.edit-form__input {
+  padding: 15px;
+  margin-bottom: 20px;
+  font-family: "Rubick", sans-serif;
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
+  border: solid 3px rgba(8, 0, 78, 0.1019607843);
+  cursor: default;
+}
+.edit-form__input.edit {
+  cursor: auto;
+  -webkit-animation: changeEditBackground 0.4s linear forwards;
+          animation: changeEditBackground 0.4s linear forwards;
+}
+.edit-form__date {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.edit-form__deadline {
+  line-height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+}
+.edit-form__created {
+  padding-left: 15px;
+}
+.edit-form__buttons {
+  margin-top: 25px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+  -webkit-column-gap: 15px;
+     -moz-column-gap: 15px;
+          column-gap: 15px;
+}
+.edit-form__btn {
+  width: 25%;
+  border: solid 2px rgba(8, 0, 78, 0.1019607843);
+}
+.edit-form__btn:disabled {
+  background-color: rgba(8, 0, 78, 0.1019607843);
+}
+.edit-form textarea {
+  resize: none;
+  height: 100px;
+}
+
+.edit-name {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.edit-deadline {
+  color: #ffc2c2;
+  margin: 0;
+  margin-left: 5px;
+  font-size: 18px;
+  height: 55px;
 }
 
 @-webkit-keyframes show {
@@ -416,51 +566,45 @@ body {
           align-items: center;
   margin-top: 20px;
   color: #000;
+  position: relative;
 }
 .create-form__input {
   width: 100%;
   margin-top: 5px;
+  margin-bottom: 20px;
   padding: 10px;
   background-color: rgba(177, 225, 255, 0.5);
-  font-family: "Rubik", sans-serif;
+  font-family: inherit;
   font-size: 16px;
 }
 .create-form__input::-webkit-input-placeholder {
-  font-family: "Rubik", sans-serif;
   font-size: 14px;
-  color: #444444;
+  color: #808080;
 }
 .create-form__input::-moz-placeholder {
-  font-family: "Rubik", sans-serif;
   font-size: 14px;
-  color: #444444;
+  color: #808080;
 }
 .create-form__input:-ms-input-placeholder {
-  font-family: "Rubik", sans-serif;
   font-size: 14px;
-  color: #444444;
+  color: #808080;
 }
 .create-form__input::-ms-input-placeholder {
-  font-family: "Rubik", sans-serif;
   font-size: 14px;
-  color: #444444;
+  color: #808080;
 }
 .create-form__input::placeholder {
-  font-family: "Rubik", sans-serif;
   font-size: 14px;
-  color: #444444;
-}
-.create-form__input:not(:first-child) {
-  margin-bottom: 15px;
+  color: #808080;
 }
 .create-form__btn {
   width: 60%;
   height: 50px;
-  font-family: "Rubik", sans-serif;
-  font-size: 18px;
+  font-family: inherit;
+  font-size: inherit;
   text-transform: uppercase;
-  border: solid 2px rgb(177, 225, 255);
-  background-color: rgb(177, 225, 255);
+  border: solid 2px #b1e1ff;
+  background-color: #b1e1ff;
   -webkit-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
@@ -473,7 +617,30 @@ body {
       -ms-transform: scale(0.9);
           transform: scale(0.9);
 }
+.create-form__alert {
+  position: absolute;
+  left: 10px;
+  top: 65px;
+  opacity: 0;
+  color: #fd8383;
+  font-size: 14px;
+}
+.create-form__alert.show {
+  -webkit-animation: show 0.3s linear forwards;
+          animation: show 0.3s linear forwards;
+}
 
 .task-note {
   resize: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.grab {
+  position: absolute;
+  height: 100%;
+  background-color: transparent;
+  cursor: col-resize;
 }

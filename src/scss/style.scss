@@ -2,8 +2,15 @@
 
 $fontFamily: "Rubick", sans-serif;
 $textColor: #fff;
-$mainColor-1: rgba(8,0,78,0.7);
-$mainColor-2: rgba(177,225,255,1);
+$mainColor-1: #08004eb3;
+$mainColor-2: #b1e1ff;
+$componentColor: #b1e1ff80;
+$completeColor: #bbffd5;
+$processColor: #08004e;
+$pendingColor: #808080;
+$deleteColor: #ffc2c2;
+$alertColor: #fd8383;
+$editColor: #08004e1a;
 
 $minWidth: 320px;
 $maxWidth: 1440;
@@ -20,7 +27,7 @@ body {
 	font-size: 18px;
 	font-weight: 400;
 	color: $textColor;
-	background: rgb(8,0,78);
+	background: #08004e;
 	background: linear-gradient(315deg, $mainColor-1 8%, $mainColor-2 100%);
 }
 
@@ -30,6 +37,8 @@ body {
 	margin: 0 auto;
 }
 
+// APP (основные элементы приложения)
+
 .app {
 	margin-top: 200px;
 	display: flex;
@@ -37,12 +46,21 @@ body {
 	min-height: 500px;
 
 	&__component {
-		background-color: rgb(177, 225, 255, 0.5);
+		background-color: $componentColor;
 		padding: 15px;
 
 		&.app__component-left {
+			min-width: 320px;
+			max-width: 50%;
 			width: 320px;
 			margin-right: 10px;
+			position: relative;
+
+			.grab {
+				right: -7px;
+				top: 0;
+				width: 14px;
+			}
 		}
 
 		&.app__component-right {
@@ -51,18 +69,32 @@ body {
 	}
 
 	&__search-form {
+		position: relative;
 		width: 100%;
+
+		&::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 50px;
+			height: 50px;
+			background-image: url('../img/search.svg');
+			background-repeat: no-repeat;
+			background-position: center;
+		}
 	}
 
 	&__search-input {
-		font-family: 'Rubik', sans-serif;
-		color: #b3b3b3;
+		font-family: inherit;
+		font-size: 16px;
+		color: $pendingColor;
 		width: 100%;
 		height: 50px;
 		padding: 15px;
+		padding-right: 50px;
 
 		&::placeholder {
-			font-family: 'Rubik', sans-serif;
 			font-size: 14px;
 		}
 	}
@@ -91,18 +123,22 @@ body {
 	}
 
 	&__btn {
-		display: flex;
 		align-items: center;
 		width: 100%;
 		padding: 10px 0;
+		font-family: inherit;
+		font-size: inherit;
+		color: inherit;
+		background-color: transparent;
 		cursor: pointer;
 		transition: background-color .3s ease;
 
 		&:hover {
-			background-color: rgb(8, 0, 78, 0.1);
+			background-color: $editColor;
 		}
 
 		&.add-task-btn {
+			display: flex;
 			&::before {
 				content: '';
 				width: 30px;
@@ -113,7 +149,15 @@ body {
 			}
 		}
 	}
+
+	&__edit-form {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+	}
 }
+
+// TODO-LIST (TODO - список)
 
 .todo-list {
 
@@ -124,13 +168,17 @@ body {
 			justify-content: space-between;
 			align-items: center;
 			background-color: $mainColor-2;
-			border-left: solid 5px #808080;
+			border-left: solid 5px $pendingColor;
 			margin-bottom: 5px;
 			transition: background-color .3s ease;
 			cursor: pointer;
 
 			&.task-complete {
-				border-left-color:rgb(187, 255, 213);
+				border-left-color: $completeColor;
+			}
+
+			&.task-process {
+				border-left-color:$processColor;
 			}
 
 			&:hover {
@@ -138,11 +186,17 @@ body {
 			}
 		}
 }
+
+// TODO-LIST-ITEM (TODO задача)
+
 .todo-list-item {
 
 		&__name {
 			flex: 1;
 			padding: 10px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 
 		&__controllers {
@@ -160,28 +214,119 @@ body {
 			transition: background-color .3s ease;
 		}
 }
+
+// TASK BUTTONS (кнопки взаимодействия с TODO-задачей)
+
 .task-complete-btn {
 	background-image: url('../img/done.svg');
 
 	&:hover {
-		background-color: rgb(187, 255, 213);
+		background-color: $completeColor;
 	}
 }
 .task-delete-btn {
 	background-image: url('../img/delete.svg');
 
 	&:hover {
-		background-color: rgb(255, 194, 194);
+		background-color: $deleteColor;
 	}
 }
 
+// EDIT-FORM (форма редактирования TODO-задачи)
 
+@keyframes changeEditBackground {
+	0% {
+		background-color: transparent;
+	};
+	100% {
+		background-color: $editColor;
+	}
+}
 
+.edit-form {
+	display: none;
+	opacity: 0;
+	padding: 15px;
+	font-size: 18px;
+	border: solid 2px rgba(177,225,255,0.5);
 
+	&.show {
+		display: flex;
+		opacity: 1;
 
+		animation: show .3s linear forwards;
+	}
 
+	&__input {
+		padding: 15px;
+		margin-bottom: 20px;
+		font-family: $fontFamily;
+		font-size: inherit;
+		color: inherit;
+		background-color: transparent;
+		border: solid 3px $editColor; 
+		cursor: default;
 
-// стилизация popup
+		&.edit {
+			cursor: auto;
+			animation: changeEditBackground .4s linear forwards;
+		}
+	}
+
+	&__date {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&__deadline {
+		line-height: 50px;
+		display: flex;
+		align-items: center;
+		justify-content: end;
+	}
+
+	&__created {
+		padding-left: 15px;
+	}
+
+	&__buttons {
+		margin-top: 25px;
+		display: flex;
+		justify-content: end;
+		column-gap: 15px;
+	}
+
+	&__btn {
+		width: 25%;
+		border: solid 2px $editColor;
+
+		&:disabled {
+			background-color: $editColor;
+		}
+	}
+
+	textarea {
+		resize: none;
+		height: 100px;
+	}
+}
+
+// EDIT-INPUTS (поля редактирования данных TODO-задачи)
+
+.edit-name {
+	font-size: 28px;
+	font-weight: 700;
+}
+.edit-deadline {
+	color: $deleteColor;
+	margin: 0;
+	margin-left: 5px;
+	font-size: 18px;
+	height: 55px;
+}
+
+// POPUP
 
 @keyframes show {
 	0% {
@@ -270,6 +415,8 @@ body {
 		}
 }
 
+// CREATE-FORM (форма создания TODO-задачи)
+
 .create-form {
 
 	display: flex;
@@ -277,35 +424,28 @@ body {
 	align-items: center;
 	margin-top: 20px;
 	color: #000;
-
-	&__label {
-		
-	}
+	position: relative;
 
 	&__input {
 		width: 100%;
 		margin-top: 5px;
+		margin-bottom: 20px;
 		padding: 10px;
 		background-color: rgba(177,225,255,0.5);
-		font-family: 'Rubik', sans-serif;
-		font-size: 16px;
+		font-family: inherit;
+		font-size: 16px;  
 
 		&::placeholder {
-			font-family: 'Rubik', sans-serif;
 			font-size: 14px;
-			color: #444444;
-		}
-
-		&:not(:first-child) {
-			margin-bottom: 15px;
+			color: $pendingColor;
 		}
 	}
 
 	&__btn {
 		width: 60%;
 		height: 50px;
-		font-family: 'Rubik', sans-serif;
-		font-size: 18px;
+		font-family: inherit;
+		font-size: inherit;
 		text-transform: uppercase;
 		border: solid 2px $mainColor-2;
 		background-color: $mainColor-2;
@@ -319,13 +459,36 @@ body {
 			transform: scale(0.9);
 		}
 	}
+
+	&__alert {
+		position: absolute;
+		left: 10px;
+		top: 65px;
+		opacity: 0;
+		color: $alertColor;
+		font-size: 14px;
+
+		&.show {
+			animation: show .3s linear forwards;
+		} 
+	}
 }
 
 .task-note {
 	resize: none;
 }
-.task-deadline {
 
+// класс для скрытия элементов
+
+.hidden {
+	display: none;
 }
 
+// стилизация захвата (растягивание блока)
 
+.grab {
+	position: absolute;
+    height: 100%;
+    background-color: transparent;
+    cursor: col-resize;
+}

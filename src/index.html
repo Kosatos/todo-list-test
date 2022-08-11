@@ -6,27 +6,39 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>Global</title>
+	<title>My TODO list</title>
 </head>
 
 <body>
 
 	<div class="container">
 		<div class="app">
+
+			<!-- Вертикальный список с наименованиями заметок TODO -->
+
 			<div class="app__component app__component-left">
-				<form class="app__search-form">
-					<input type="text" class="app__search-input" placeholder="Search your task...">
+
+				<!-- Форма поиска заметок TODO по имени -->
+
+				<form class="app__search-form" id="search-form">
+					<input type="text" class="app__search-input" id="search-input" placeholder="Search your task...">
 				</form>
 				<h2 class="app__title">Your tasks:</h2>
 				<ul class="app__todo-list todo-list" id="todo-list">
 				</ul>
 				<div class="app__btn add-task-btn" id="add-task-btn">Add task</div>
 
+				<div class="grab"></div>
 			</div>
+
+			<!-- Область взаимодействия заметки TODO -->
+
 			<div class="app__component app__component-right">
 			</div>
 		</div>
 	</div>
+
+	<!-- Popup для создания задачи -->
 
 	<div id="create-task-popup" class="overlay">
 		<div class="cancel" id="cancel-popup" href="/"></div>
@@ -37,7 +49,7 @@
 			<form class="create-form" id="create-form">
 
 				<label for="create-task-name" class="create-form__label">Task name:</label>
-				<input type="text" class="create-form__input" id="create-task-name"
+				<input type="text" class="create-form__input task-name" id="create-task-name"
 					placeholder="Enter the task name...">
 
 				<label for="create-task-note" class="create-form__label">Notes:</label>
@@ -48,6 +60,8 @@
 				<input type="date" class="create-form__input task-deadline" id="create-task-deadline">
 
 				<button class="create-form__btn">Create task</button>
+
+				<span class="create-form__alert"></span>
 
 			</form>
 
@@ -63,7 +77,9 @@
 					</g>
 				</svg>
 			</div>
+
 		</div>
+	</div>
 
 </body>
 
